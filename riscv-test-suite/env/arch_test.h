@@ -717,6 +717,51 @@ rvtest_data_end:
 4:   RVTEST_SIGUPD(swreg,tempreg,offset) 
 //SREG tempreg, offset(swreg);                
 
+
+
+
+#define TEST_BRANCH_BWD_RETURNBLOCK(imm)         \
+    j . + (2*imm)                               ;\
+    .rept (imm-2)/2                             ;\
+        j . + (2*imm) + 12                      ;\
+    .endr
+
+#define TEST_BRANCH_BWD_OP(inst, tempreg, reg1, reg2, val1, val2, imm, swreg, offset, sigtag) \
+    LI(reg1, MASK_XLEN(val1))                   ;\
+    LI(reg2, MASK_XLEN(val2))                   ;\
+    addi tempreg,x0,0                           ;\
+                                                ;\
+    inst reg1, reg2, . - (2*imm)                ;\
+    addi tempreg, tempreg,0x2                   ;\
+    j 1f                                        ;\
+    /* taken branch returns here from prefix */ ;\
+    addi tempreg,tempreg, 0x1                   ;\
+                                                ;\
+1:  RVTEST_SIGBASE(swreg,sigtag)                ;\
+    RVTEST_SIGUPD(swreg,tempreg,offset)
+
+#define TEST_BRANCH_FWD_OP(inst, tempreg, reg1, reg2, val1, val2, imm, swreg, offset, sigtag) \
+    LI(reg1, MASK_XLEN(val1))                   ;\
+    LI(reg2, MASK_XLEN(val2))                   ;\
+    addi tempreg,x0,0                           ;\
+                                                ;\
+    inst reg1, reg2, . + (2*imm)                ;\
+    addi tempreg, tempreg,0x2                   ;\
+    j 1f                                        ;\
+    /* taken branch returns here from suffix */ ;\
+    addi tempreg, tempreg,0x3                   ;\
+                                                ;\
+1:  RVTEST_SIGBASE(swreg,sigtag)                ;\
+    RVTEST_SIGUPD(swreg,tempreg,offset)
+
+#define TEST_BRANCH_FWD_RETURNBLOCK(imm)         \
+    j . + (2*imm)                               ;\
+    .rept (imm-2)/2                             ;\
+        j . - (2*imm) + 12                      ;\
+    .endr
+
+
+
 #define TEST_STORE(swreg,testreg,index,rs1,rs2,rs2_val,imm_val,offset,inst,adj)   ;\
 LI(rs2,rs2_val)                                                             ;\
 addi rs1,swreg,offset+adj                                                     ;\

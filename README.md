@@ -1,3 +1,26 @@
+## Modification to fit the tests into 64 KiByte of RAM
+
+  * `jal-01.S`: offsets of 3 tests are cut to 8 bits (from 20 bits)
+  * `b??-01.S`: branches with the same offset and direction are grouped together
+    to share the space between branch instruction and target
+
+Branch test modification
+  * All cases with offset N < 0x100 are not modified
+  * Cases with larger offsets are grouped together. There are only four groups with offsets 0x100, 0x200, 0x400 and 0x556.
+  * Every group with offset N consists of four blocks:
+      - Block 1: N/2 forward jumps with relative offset  N + 12
+      - Block 2: The backward test cases with the appropriate offset. They jump to block 1 and from there back to this block, but at the position where the correct signature is written.
+      - Block 3: The forward test cases, jumping into block 4 and back to block 3 where the signature is written
+      - Block 4: N/2 backward jumps with relative offset -N + 12
+
+Special cases:
+  * Additional jump blocks are necessary, when the accumulated code size of  the tests is larger than the offset
+  * Some tests use different signature pointers/registers. Care must be taken to write to the correct position within the signature 
+
+
+
+---
+
 # RISC-V Architecture Test SIG
 
 
