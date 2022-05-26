@@ -1,5 +1,85 @@
 # CHANGELOG
 
+
+## [2.7.4] - 2022-04-18
+  - Clean fflags in F* macros
+  - Update rv32i_m/F and rv64i_m/D signatures
+
+## [2.7.3] - 2022-03-31
+  - Update framework to support test suite compilation with LLVM.
+
+## [2.7.2] - 2022-03-18
+- Add sigalign based changes to F&D sigupd macros.
+- Add helper macro to check offset legality.
+
+
+## [2.7.1] - 2022-03-18
+- Fix bug in auto-offset update for SIGUPD macros.
+
+## [2.7.0] - 2022-03-15
+  - Updated K Crypto (Scalar) instructions for the V.1.0.0 ratified spec.
+  - changed xperm.n -> xperm4 and xperm.b -> xperm8 instructions 
+  - removed unsupported packu
+
+## [2.6.3] - 2022-03-04
+  - import and synchronize P-ext changes in arch_test.h from riscv-ctg
+  - automatically adjust base and offset if offset gets too big
+
+
+## [2.6.2] - 2022-02-24
+  - modified verify.sh to ignore comments in reference signature during diff operation [#230]
+  - udpated test-format spec to include the order of lines in the signature file [#214]
+  - RVTEST_E macro to be enabled for all rv32E tests. [#227]
+
+## [2.6.1] - 2021-11-25
+  - Fixed RVTEST_FP_ENABLE macro for the issue #223
+
+## [2.6.0] - 2021-10-21
+  - Added rv64d tests, references, coverage files and data propagation reports
+  - removed unwated re-assignment of macros for RV64F combination in `arch_test.h`
+  - fixed rvtest-case strings for flw and fsw tests in rv32if suite
+
+## [2.5.4] - 2021-10-20
+  - Second Fix for the issue #206
+
+## [2.5.3] - 2021-10-15
+  - fix the lower case `i` in the `RVTEST_CASE` macros used in the shift operation tests.
+
+## [2.5.2] - 2021-10-14
+  - update format for aes32 and sm4 instructions
+  - update reference signature for sha256 and sm3 instructions in rv64i_m/K_unratified
+  - delete zip and unzip tests in rv64i_m/K_unratified
+  - update tests for aes64ks1i, sm4ed and sm4ks to use byte_count with overlap = "Y" to improve the coverage of S-boxes
+
+## [2.5.1] - 2021-10-07
+  - added styles files to the F coverage report directories.
+
+## [2.5.0] - 2021-10-01
+  - Added rv32f tests, references, coverage files and data propagation reports
+  - fixed broken links in READMEs across the repo.
+  - corrected string "EBREAK" in io string macro to "ECALL" for ecall.S tests. #207
+  - fixed typo `.alive` --> `.align` in `riscv-target/example_target/model_test.h`.
+
+## [2.4.7] - 2021-10-01
+  - Fix for the issue #206
+
+## [2.4.6] - 2021-08-02
+  - Added rv32e tests in riscv-test-suite
+  
+## [2.4.5] - 2021-07-29
+  - fix for issue #195
+
+## [2.4.4] - 2021-07-19
+  - Annotating tags during releases
+
+## [2.4.3] - 2021-05-20
+  - added new 64-bit K crypto tests as per the test-plan presented by the scalar crypto task group
+    [here](https://github.com/riscv/riscv-crypto/blob/d89dfee25780f79c162da4eb69cd9076dd701c88/tests/compliance/test-plan-scalar.adoc)
+  - added new 32-bit K crypto tests as per the above mentioned test-plan.
+  - added coverage and data propagation reports for the above tests.
+  - updated README in riscv-test-suite
+  - added missing semi-colon in example target Makefile.include files
+
 ## [2.4.2] - 2021-04-20
   - changed all occurances of SPTBR to the new name SATP
 

@@ -21,8 +21,17 @@ Special cases:
 
 ---
 
-# RISC-V Architecture Test SIG
 
+# :red_circle: IMPORTANT DISCLAIMER :red_circle:
+
+The current default branch [master] will be  completely replaced with branch [riscof-dev](https://github.com/riscv-non-isa/riscv-arch-test/tree/riscof-dev) on  **1st MAY 2022**.
+This transition essentially migrates the current framework to the RISCOF framework.
+This provides a much richer and configurable environment for targets to test their compatibility.
+The current framework will be archived and **NO LONGER SUPPORTED AFTER 1st MAY 2022.**
+It is therefore recommended that ALL model/target owners  migrate their targets to the riscof environment ASAP.
+More information on porting your target to RISCOF is available here: https://riscof.readthedocs.io/en/stable/
+
+# RISC-V Architecture Test SIG
 
 This is a repository for the work of the RISC-V Foundation Architecture Test SIG. The repository owners are:
 
@@ -36,6 +45,7 @@ For more details and documentation on the current testing framework see: [doc/RE
 For more details on the test format spec see: [spec/TestFormatSpec.adoc](spec/TestFormatSpec.adoc)
 
 For contributions and reporting issues please refer to [CONTRIBUTION.md](CONTRIBUTION.md)
+
 
 ## Test Disclaimers
 
@@ -53,7 +63,7 @@ when reporting the status of pass/fail on the execution of the architectural sui
    have compressed extension support enabled by default. Targets without the compressed extension 
    support will fail the following tests:
    1. rv[32/64]i_m/privilege/src/misalign-b[ge[u],lt[u],eq,ne]-01.S
-   2. rv[32/64]i_m/privilege/src/misalign[1,2]-jalr-01.S
+   2. rv[32/64]i_m/privilege/src/misalign2-jalr-01.S
 
 3. The machine mode trap handler used in the privilege tests assumes one of the following conditions. 
    Targets not satisfying any of the following conditions are bound to fail the entire 
@@ -88,9 +98,9 @@ The files [`COPYING.BSD`](./COPYING.BSD), [`COPYING.APACHE`](./COPYING.APACHE) a
 
 ## Quick Links:
 
-- RISCOF \[[DOCS](https://riscof.readthedocs.io/en/latest/)\] \[[REPO](https://gitlab.com/incoresemi/riscof/)\]: This is the next version of the architectural test framework currently under development
-- RISCV-ISAC \[[DOCS](https://riscv-isac.readthedocs.io/en/latest/index.html)\] \[[REPO](https://github.com/riscv/riscv-isac)\] : This is an ISA level coverage extraction tool for RISC-V which used to generate the coverage statistics of the architectural tests.
-- RISCV-CTG: \[[DOCS](https://riscv-ctg.readthedocs.io/en/latest/index.html)\]\[[REPO](https://github.com/riscv/riscv-ctg)\]: This is a RISC-V Architectural Test generator used to generate some of the tests already checked into this repository. Docs to be updated soon !!
+- RISCOF \[[DOCS](https://riscof.readthedocs.io/en/latest/)\] \[[REPO](https://github.com/riscv-software-src/riscof)\]: This is the next version of the architectural test framework currently under development
+- RISCV-ISAC \[[DOCS](https://riscv-isac.readthedocs.io/en/latest/index.html)\] \[[REPO](https://github.com/riscv-software-src/riscv-isac)\] : This is an ISA level coverage extraction tool for RISC-V which used to generate the coverage statistics of the architectural tests.
+- RISCV-CTG: \[[DOCS](https://riscv-ctg.readthedocs.io/en/latest/index.html)\]\[[REPO](https://github.com/riscv-software-src/riscv-ctg)\]: This is a RISC-V Architectural Test generator used to generate some of the tests already checked into this repository.
 - [Videos](https://youtu.be/VIW1or1Oubo): This Global Forum 2020 video provides an introduction to the above mentioned tools
 - [riscvOVPsim](https://github.com/riscv-ovpsim/imperas-riscv-tests): Imperas freeware RISC-V reference simulator for compliance testing
 - [riscvOVPsimPlus](https://www.ovpworld.org/riscvOVPsimPlus/): Imperas enhanced freeware RISC-V reference simulator for test development and verification
